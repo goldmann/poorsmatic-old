@@ -10,8 +10,10 @@ module Poorsmatic
     end
 
     def on_message(url)
-      if data = fetch(url)
-        @log.info count(data)
+      if raw = fetch(url)
+        c, title = parse(raw)
+
+        Link.new(:url => url, :title => title).save!
       end
     end
 
@@ -25,19 +27,20 @@ module Poorsmatic
       end
     end
 
-    def count(data)
+    def parse(data)
       @log.debug "Parsing the document..."
 
       page = Nokogiri::HTML(data)
       body = page.xpath("/html/body").text
+      title = page.xpath("/html/head/title").text
 
       @log.debug "Finding words..."
 
-      nb = body.scan(/[\w]+/).size
+      c = body.scan(/[\w]+/).size
 
-      @log.debug "Document parsed, got #{nb} words"
+      @log.debug "Document parsed, got #{c} words"
 
-      nb
+      [c, title]
     end
 
   end
