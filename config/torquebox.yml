@@ -1,0 +1,25 @@
+---
+# This is the TorqueBox configuration file. Refer to the TorqueBox
+# documentation at http://torquebox.org/documentation/current/ 
+# for all configuration options.
+web:
+  context: "/"
+
+queues:
+  /queues/urls:
+
+topics:
+  /topics/terms:
+
+services:
+  twitter-service:
+    service: Poorsmatic::TwitterService
+    config:
+      credentials:
+        consumer_key: 'Consumer key'
+        consumer_secret: 'Consumer secret'
+        access_token: 'Access token'
+        access_secret: 'Access token secret'
+
+messaging:
+  /queues/urls: Poorsmatic::UrlScrapper
