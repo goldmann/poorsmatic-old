@@ -8,6 +8,14 @@
 </head>
 <body>
 
+<h2>Menu</h2>
+
+<ul>
+  <li><%= link_to 'Home', root_path %></li>
+  <li><%= link_to 'List of terms', terms_path %></li>
+  <li><%= link_to 'List of links', links_path %></li>
+</ul>
+
 <%= yield %>
 
 </body>
